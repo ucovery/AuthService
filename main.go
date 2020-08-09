@@ -1,11 +1,17 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	addr, err := determineListenAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	http.HandleFunc("/", HomePage)
 
@@ -24,5 +30,16 @@ func main() {
 
 	//Запускаем сервер на порте 8080
 
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	log.Printf("Listening on %s...\n", addr)
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		panic(err)
+	}
+}
+
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
 }
