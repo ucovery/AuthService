@@ -251,3 +251,7 @@ func SetTokenToCookie(Writer http.ResponseWriter, cookieName string, cookieValue
 		HttpOnly: HttpOnly,
 	})
 }
+
+func HomePage(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Test Application")
+}

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -8,7 +9,14 @@ import (
 
 func main() {
 
-	port := GetPort()
+	addr, err := determineListenAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	http.HandleFunc("/", HomePage)
+
+	/*port := GetPort()*/
 	//Определяем маршруты
 	//Маршрут выдает пару access-refresh токенов
 	http.HandleFunc("/signin", Signin)
@@ -23,14 +31,26 @@ func main() {
 	http.HandleFunc("/deleteall", DeleteAllUserTokens)
 
 	//Запускаем сервер на порте 8000
-	log.Fatal(http.ListenAndServe(port, nil))
+
+	log.Printf("Listening on %s...\n", addr)
+	if err := http.ListenAndServe(addr, nil); err != nil {
+		panic(err)
+	}
 }
 
-func GetPort() string {
+/*func GetPort() string {
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8000"
 		log.Println("[-] No PORT environment variable detected. Setting to ", port)
 	}
 	return ":" + port
+}*/
+
+func determineListenAddress() (string, error) {
+	port := os.Getenv("PORT")
+	if port == "" {
+		return "", fmt.Errorf("$PORT not set")
+	}
+	return ":" + port, nil
 }
