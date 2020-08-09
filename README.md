@@ -7,7 +7,7 @@ ROUTS description:
 1# Generates access-refresh tokens with user guid:
 http://localhost:8000/signin
 
-*POST for Postman
+POST for Postman
 {
 	"userguid": "85e321eb-d0d2-4e88-90cf-4236a1675199"
 }
@@ -26,7 +26,7 @@ http://localhost:8000/deleteone
 ==================
 4# Delete all tokens in DB for choosen user
 http://localhost:8000/deleteall
-*POST for Postman
+POST for Postman
 {
 	"userguid": "85e321eb-d0d2-4e88-90cf-4236a1675199"
 }
