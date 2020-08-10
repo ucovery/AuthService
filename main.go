@@ -8,20 +8,19 @@ import (
 func main() {
 
 	http.HandleFunc("/", HomePage)
-	/*
-		//Определяем маршруты
-		//Маршрут выдает пару access-refresh токенов
-		http.HandleFunc("/signin", Signin)
 
-		//Маршрут обновляет пару access-refresh токенов
-		http.HandleFunc("/refresh", Refresh)
+	//Определяем маршруты
+	//Маршрут выдает пару access-refresh токенов
+	http.HandleFunc("/signin", Signin)
 
-		//Маршрут удаляет конкретный токен
-		http.HandleFunc("/deleteone", DeleteCurrentToken)
+	//Маршрут обновляет пару access-refresh токенов
+	http.HandleFunc("/refresh", Refresh)
 
-		//Маршрут удаляет все токены выданные конекретному guid
-		http.HandleFunc("/deleteall", DeleteAllUserTokens)
-	*/
+	//Маршрут удаляет конкретный токен
+	http.HandleFunc("/deleteone", DeleteCurrentToken)
+
+	//Маршрут удаляет все токены выданные конекретному guid
+	http.HandleFunc("/deleteall", DeleteAllUserTokens)
 
 	http.ListenAndServe(":"+os.Getenv("PORT"), nil)
 
