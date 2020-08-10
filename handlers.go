@@ -4,9 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
@@ -253,5 +253,5 @@ func SetTokenToCookie(Writer http.ResponseWriter, cookieName string, cookieValue
 }
 
 func HomePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Test Application")
+	fmt.Fprintf(w, "Test Application:"+os.Getenv("PORT"))
 }
