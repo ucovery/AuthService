@@ -1,1 +1,1 @@
-Web: AuthService
+web: AuthService
