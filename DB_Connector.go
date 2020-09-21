@@ -13,7 +13,7 @@ import (
 )
 
 func GetDatabaseConnection() (*mongo.Collection, error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://TestUser:TestUser@golangauth.oxu9m.mongodb.net/GoLangAuth?retryWrites=true&w=majority"))
+	client, err := mongo.NewClient(options.Client().ApplyURI("mongodb+srv://<-DB_URL->"))
 	if err != nil {
 		log.Fatal(err)
 	}
